@@ -95,7 +95,7 @@ function renderStock() {
 
 function renderSales() {
   const sales = todaySales();
-  $('#salesList').innerHTML = sales.length ? sales.slice().reverse().map((sale) => `<div class="sale-row"><div class="sale-main"><strong>บิล #${escapeHtml(sale.invoice)}</strong><small>${new Date(sale.createdAt).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' })} · ${sale.items} รายการ</small></div><strong>${money(sale.total)}</strong></div>`).join('') : '<p class="empty">ยังไม่มีรายการขายวันนี้</p>';
+  $('#salesList').innerHTML = sales.length ? sales.slice().reverse().map((sale) => `<details class="sale-detail"><summary><div class="sale-row"><div class="sale-main"><strong>บิล #${escapeHtml(sale.invoice)}</strong><small>${new Date(sale.createdAt).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' })} · ${sale.items} รายการ</small></div><strong>${money(sale.total)}</strong><span class="sale-chevron">⌄</span></div></summary><div class="sale-lines">${sale.details?.length ? sale.details.map((item) => `<div class="sale-line"><span>${escapeHtml(item.name)}<small>${item.quantity} ${escapeHtml(item.unit)} × ${money(item.price)}</small></span><strong>${money(item.quantity * item.price)}</strong></div>`).join('') : '<p class="empty">บิลนี้เป็นรายการเก่าที่ไม่มีรายละเอียดสินค้า</p>'}<div class="sale-detail-total"><span>รวมบิล</span><strong>${money(sale.total)}</strong></div></div></details>`).join('') : '<p class="empty">ยังไม่มีรายการขายวันนี้</p>';
 }
 function renderAll() { renderSummary(); renderSellProducts(); renderCart(); renderStock(); renderSales(); }
 
@@ -105,7 +105,7 @@ function changeCart(id, delta) { if (!cart[id]) return; const next = cart[id].qu
 function checkout() {
   const items = Object.values(cart); if (!items.length) return showToast('กรุณาเลือกสินค้าก่อน');
   items.forEach((item) => { const product = state.products.find((p) => p.id === item.product.id); product.stock -= item.quantity; });
-  state.sales.push({ invoice: String(state.sales.length + 1).padStart(4, '0'), date: todayKey(), createdAt: new Date().toISOString(), items: items.reduce((sum, item) => sum + item.quantity, 0), total: cartTotal() });
+  state.sales.push({ invoice: String(state.sales.length + 1).padStart(4, '0'), date: todayKey(), createdAt: new Date().toISOString(), items: items.reduce((sum, item) => sum + item.quantity, 0), total: cartTotal(), details: items.map((item) => ({ name: item.product.name, code: item.product.code, unit: item.product.unit, price: item.product.price, quantity: item.quantity })) });
   cart = {}; saveState(); renderAll(); showToast('บันทึกการขายเรียบร้อย');
 }
 
