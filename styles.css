@@ -3,3 +3,16 @@
 .stock-actions{flex-wrap:wrap;justify-content:flex-end}
 .stock-actions .delete-button{color:var(--danger);border-color:#efc3bc;font-size:.72rem}
 .stock-actions button:active{transform:scale(.95)}
+
+.clear-button{border:1px solid #efc3bc;background:#fff7f5;color:var(--danger);min-height:40px;padding:0 12px;border-radius:12px;font-size:.78rem;font-weight:800}
+.clear-button:active{transform:scale(.97)}
+.heading-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.secondary-button{border:1px solid #b9e1d2;background:var(--mint);color:var(--brand);border-radius:13px;padding:9px 11px;font-weight:800;font-size:.78rem}
+.mobile-cart-bar{display:none}
+@media(max-width:599px){
+  body{padding-bottom:78px}
+  .mobile-cart-bar{position:fixed;display:flex;align-items:center;justify-content:space-between;gap:12px;left:10px;right:10px;bottom:10px;z-index:20;background:rgba(23,53,47,.97);color:#fff;border-radius:18px;padding:10px 12px 10px 15px;box-shadow:0 12px 35px rgba(0,0,0,.22)}
+  .mobile-cart-bar small{display:block;color:#bce5d6;font-size:.68rem}
+  .mobile-cart-bar strong{display:block;font-size:.88rem;margin-top:2px}
+  .mobile-cart-bar .primary-button{background:#fff;color:var(--brand-dark);min-height:38px}
+}

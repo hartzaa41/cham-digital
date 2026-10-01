@@ -14,7 +14,7 @@
         <p class="eyebrow">ร้านชุมชน</p>
         <h1>สต็อกง่าย ขายไว</h1>
       </div>
-      <button class="icon-button" id="resetDataBtn" title="เริ่มข้อมูลตัวอย่างใหม่" aria-label="เริ่มข้อมูลตัวอย่างใหม่">↻</button>
+      <button class="clear-button" id="resetDataBtn" title="ล้างข้อมูลทั้งหมด" aria-label="ล้างข้อมูลทั้งหมด">ล้างข้อมูล</button>
     </header>
 
     <main>
@@ -52,7 +52,7 @@
       </section>
 
       <section id="stockView" class="view">
-        <div class="section-heading"><div><p class="eyebrow">คลังสินค้า</p><h2>สินค้าทั้งหมด</h2></div><button class="primary-button small" id="addProductBtn">+ เพิ่มสินค้า</button></div>
+        <div class="section-heading"><div><p class="eyebrow">คลังสินค้า</p><h2>สินค้าทั้งหมด</h2></div><div class="heading-actions"><button class="secondary-button small" id="loadSampleBtn">ตัวอย่าง 30 รายการ</button><button class="primary-button small" id="addProductBtn">+ เพิ่มสินค้า</button></div></div>
         <label class="search-box"><span>⌕</span><input id="stockSearch" type="search" placeholder="ค้นหาสินค้า" /></label>
         <div id="stockList" class="stock-list"></div>
       </section>
@@ -64,12 +64,17 @@
       </section>
     </main>
 
+    <div class="mobile-cart-bar" id="mobileCartBar">
+      <div><small>บิลปัจจุบัน</small><strong id="mobileCartSummary">0 รายการ · ฿0.00</strong></div>
+      <button class="primary-button small" id="viewCartBtn">ดูบิล</button>
+    </div>
+
     <footer><span>ข้อมูลเก็บในเครื่องนี้ด้วย localStorage</span><span>v1.0 HTML</span></footer>
   </div>
 
   <dialog id="productDialog">
     <form method="dialog" id="productForm" class="dialog-card">
-      <div class="section-heading compact"><div><p class="eyebrow" id="productDialogEyebrow">สินค้าใหม่</p><h2 id="productDialogTitle">เพิ่มสินค้า</h2></div><button class="close-button" value="cancel" aria-label="ปิด">×</button></div>
+      <div class="section-heading compact"><div><p class="eyebrow" id="productDialogEyebrow">สินค้าใหม่</p><h2 id="productDialogTitle">เพิ่มสินค้า</h2></div><button type="button" class="close-button" id="closeProductDialog" aria-label="ปิด">×</button></div>
       <label>ชื่อสินค้า<input name="name" required placeholder="เช่น น้ำดื่ม 600 มล." /></label>
       <div class="form-row"><label>รหัสสินค้า<input name="code" placeholder="เช่น P001" /></label><label>หน่วย<input name="unit" value="ชิ้น" required /></label></div>
       <div class="form-row"><label>ราคาขาย<input name="price" type="number" min="0" step="0.01" required /></label><label>จำนวนเริ่มต้น<input name="stock" type="number" min="0" step="1" required /></label></div>
