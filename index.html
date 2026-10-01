@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#176b5b" />
+  <title>ร้านชุมชน | สต็อกง่าย ขายไว</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">ร้านชุมชน</p>
+        <h1>สต็อกง่าย ขายไว</h1>
+      </div>
+      <button class="icon-button" id="resetDataBtn" title="เริ่มข้อมูลตัวอย่างใหม่" aria-label="เริ่มข้อมูลตัวอย่างใหม่">↻</button>
+    </header>
+
+    <main>
+      <section class="hero-card">
+        <div>
+          <p class="eyebrow light">วันนี้</p>
+          <h2 id="todayLabel">กำลังโหลด...</h2>
+          <p class="hero-note">จัดการสินค้าและบันทึกการขายได้จากมือถือ</p>
+        </div>
+        <div class="hero-mark">฿</div>
+      </section>
+
+      <section class="quick-stats" aria-label="สรุปข้อมูล">
+        <article class="stat-card"><span>สินค้า</span><strong id="productCount">0</strong><small>รายการ</small></article>
+        <article class="stat-card"><span>ใกล้หมด</span><strong id="lowStockCount">0</strong><small>รายการ</small></article>
+        <article class="stat-card accent"><span>ยอดขายวันนี้</span><strong id="todaySales">฿0</strong><small id="todayBills">0 บิล</small></article>
+      </section>
+
+      <nav class="tabs" aria-label="เมนูหลัก">
+        <button class="tab active" data-view="sellView">ขายสินค้า</button>
+        <button class="tab" data-view="stockView">จัดการสต็อก</button>
+        <button class="tab" data-view="reportView">ยอดขายวันนี้</button>
+      </nav>
+
+      <section id="sellView" class="view active-view">
+        <div class="section-heading"><div><p class="eyebrow">หน้าขาย</p><h2>เลือกสินค้าใส่บิล</h2></div><span class="pill" id="cartCount">0 รายการ</span></div>
+        <label class="search-box"><span>⌕</span><input id="sellSearch" type="search" placeholder="ค้นหาชื่อสินค้า หรือรหัสสินค้า" /></label>
+        <div id="sellProducts" class="product-grid"></div>
+        <div class="cart-card">
+          <div class="section-heading compact"><h3>รายการในบิล</h3><button class="text-button" id="clearCartBtn">ล้างบิล</button></div>
+          <div id="cartItems" class="cart-items"><p class="empty">ยังไม่มีสินค้าในบิล</p></div>
+          <div class="checkout-row"><strong>รวมทั้งสิ้น</strong><strong class="total" id="cartTotal">฿0.00</strong></div>
+          <button class="primary-button full" id="checkoutBtn">บันทึกการขาย</button>
+        </div>
+      </section>
+
+      <section id="stockView" class="view">
+        <div class="section-heading"><div><p class="eyebrow">คลังสินค้า</p><h2>สินค้าทั้งหมด</h2></div><button class="primary-button small" id="addProductBtn">+ เพิ่มสินค้า</button></div>
+        <label class="search-box"><span>⌕</span><input id="stockSearch" type="search" placeholder="ค้นหาสินค้า" /></label>
+        <div id="stockList" class="stock-list"></div>
+      </section>
+
+      <section id="reportView" class="view">
+        <div class="section-heading"><div><p class="eyebrow">สรุปวันนี้</p><h2>ประวัติการขาย</h2></div></div>
+        <div class="report-total"><span>ยอดขายรวมวันนี้</span><strong id="reportTotal">฿0.00</strong></div>
+        <div id="salesList" class="sales-list"><p class="empty">ยังไม่มีรายการขายวันนี้</p></div>
+      </section>
+    </main>
+
+    <footer><span>ข้อมูลเก็บในเครื่องนี้ด้วย localStorage</span><span>v1.0 HTML</span></footer>
+  </div>
+
+  <dialog id="productDialog">
+    <form method="dialog" id="productForm" class="dialog-card">
+      <div class="section-heading compact"><div><p class="eyebrow" id="productDialogEyebrow">สินค้าใหม่</p><h2 id="productDialogTitle">เพิ่มสินค้า</h2></div><button class="close-button" value="cancel" aria-label="ปิด">×</button></div>
+      <label>ชื่อสินค้า<input name="name" required placeholder="เช่น น้ำดื่ม 600 มล." /></label>
+      <div class="form-row"><label>รหัสสินค้า<input name="code" placeholder="เช่น P001" /></label><label>หน่วย<input name="unit" value="ชิ้น" required /></label></div>
+      <div class="form-row"><label>ราคาขาย<input name="price" type="number" min="0" step="0.01" required /></label><label>จำนวนเริ่มต้น<input name="stock" type="number" min="0" step="1" required /></label></div>
+      <button class="primary-button full" value="default">บันทึกสินค้า</button>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
